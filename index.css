@@ -4,6 +4,10 @@
   background: grey;
 }
 
+#etchContainer {
+  min-width: 700px;
+}
+
 .etch {
   width: fit-content;
   background: red;
