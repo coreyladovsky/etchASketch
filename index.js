@@ -69,6 +69,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  document.addEventListener("keyup", e => {
+    switch (e.code) {
+      case "ArrowUp":
+      case "w":
+        ball.movement.up = false;
+        break;
+      case "ArrowDown":
+      case "s":
+        ball.movement.down = false;
+        break;
+      case "ArrowRight":
+      case "d":
+        ball.movement.right = false;
+        break;
+      case "ArrowLeft":
+      case "a":
+        ball.movement.left = false;
+        break;
+      default:
+    }
+  });
+
   let ball = new Ball(ctx);
 
   function step() {
