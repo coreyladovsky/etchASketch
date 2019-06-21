@@ -5,9 +5,21 @@
     <title>Etch</title>
     <link rel="stylesheet" href="./index.css" />
     <script type="text/javascript" src="./index.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="etch"><canvas id="canvas" width="300" height="300"></canvas></div>
-    <button id="reset" type="button" name="button">ERASE</button>
+    <div class="intro">
+      COREY'S ETCH
+    </div>
+    <div id="etchContainer">
+      <div class="etch">
+        <canvas id="canvas" width="600" height="400"></canvas>
+      </div>
+      <div class="buttons">
+        <div class="whiteButton"></div>
+        <div class="whiteButton"></div>
+      </div>
+      <div class="resetContainer"><button id="reset" type="button" name="button">ERASE</button></div>
+    </div>
   </body>
 </html>

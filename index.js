@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#reset").addEventListener("click", () => {
     ctx.clearRect(0, 0, 700, 700);
+    document.querySelector("#etchContainer").classList.add("shake");
+    setTimeout(() => {
+      document.querySelector("#etchContainer").classList.remove("shake");
+    }, 500)
   });
 
   const canvas = document.getElementById("canvas");
@@ -13,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         (this.vx = 1),
         (this.vy = 1),
         (this.radius = 1),
-        (this.color = "blue"),
+        (this.color = "black"),
         (this.ctx = ctx),
         (this.movement = { up: false, down: false, left: false, right: false });
     }
@@ -96,12 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function step() {
     // ctx.clearRect(0,0, canvas.width, canvas.height)
     ball.draw();
-    if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-      ball.vy = -ball.vy;
-    }
-    if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-      ball.vx = -ball.vx;
-    }
+    // if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+    //   ball.vy = -ball.vy;
+    // }
+    // if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+    //   ball.vx = -ball.vx;
+    // }
     ball.updatePosition()
     requestAnimationFrame(step);
   }
