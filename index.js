@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#reset").addEventListener("click", () => {
-    ctx.clearRect(0, 0, 700, 700);
     document.querySelector("#etchContainer").classList.add("shake");
     setTimeout(() => {
       document.querySelector("#etchContainer").classList.remove("shake");
+      ctx.clearRect(0, 0, 700, 700);
     }, 500)
   });
 
@@ -16,13 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
         (this.y = 10),
         (this.vx = 1),
         (this.vy = 1),
-        (this.radius = 1),
+        (this.radius = 2),
         (this.color = "black"),
         (this.ctx = ctx),
         (this.movement = { up: false, down: false, left: false, right: false });
     }
 
     draw() {
+
       this.ctx.beginPath();
       this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
       this.ctx.closePath();
@@ -31,41 +32,53 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     updatePosition() {
-      this.y = this.y;
+
       if (this.movement.up) {
-        this.y -= 1;
+        this.y -= this.vy;
+        if(this.y < 0) {
+          this.y += this.vy
+        }
       }
       if (this.movement.down) {
-        this.y += 1;
+        this.y += this.vy;
+        if(this.y > canvas.height) {
+          this.y -= this.vy
+        }
       }
       if (this.movement.right) {
-        this.x += 1;
+        this.x += this.vx;
+        if(this.x > canvas.width) {
+          this.x -= this.vx
+        }
       }
       if (this.movement.left) {
-        this.x -= 1;
+        this.x -= this.vx;
+        if(this.x < 0) {
+          this.x += this.vy
+        }
       }
     }
   }
 
   document.addEventListener("keydown", e => {
-    switch (e.code) {
+    switch (e.key) {
       case "ArrowUp":
-      case "w":
+      case "a":
         ball.movement.down = false;
         ball.movement.up = true;
         break;
       case "ArrowDown":
-      case "s":
+      case "z":
         ball.movement.up = false;
         ball.movement.down = true;
         break;
       case "ArrowRight":
-      case "d":
+      case "k":
         ball.movement.left = false;
         ball.movement.right = true;
         break;
       case "ArrowLeft":
-      case "a":
+      case "m":
         ball.movement.right = false;
         ball.movement.left = true;
         break;
@@ -74,21 +87,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("keyup", e => {
-    switch (e.code) {
+    switch (e.key) {
       case "ArrowUp":
-      case "w":
+      case "a":
         ball.movement.up = false;
         break;
       case "ArrowDown":
-      case "s":
+      case "z":
         ball.movement.down = false;
         break;
       case "ArrowRight":
-      case "d":
+      case "k":
         ball.movement.right = false;
         break;
       case "ArrowLeft":
-      case "a":
+      case "m":
         ball.movement.left = false;
         break;
       default:
@@ -100,12 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function step() {
     // ctx.clearRect(0,0, canvas.width, canvas.height)
     ball.draw();
-    // if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-    //   ball.vy = -ball.vy;
-    // }
-    // if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-    //   ball.vx = -ball.vx;
-    // }
     ball.updatePosition()
     requestAnimationFrame(step);
   }
