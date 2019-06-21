@@ -23,12 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     draw() {
-
       this.ctx.beginPath();
       this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-      this.ctx.closePath();
       this.ctx.fillStyle = this.color;
       this.ctx.fill();
+      this.ctx.closePath();
+
+      this.ctx.beginPath();
+      this.ctx.arc(this.x, this.y, 1, 0, Math.PI * 2, true);
+      this.ctx.fillStyle = 'grey';
+      this.ctx.fill();
+      this.ctx.closePath();
     }
 
     updatePosition() {
